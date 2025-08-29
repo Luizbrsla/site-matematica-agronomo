@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AgroCalc - Calculadora para Agricultores</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>🌱 AgroCalc</h1>
+            <p>Ferramentas matemáticas para facilitar o trabalho do agricultor</p>
+        </div>
+    </header>
+
+    <nav>
+        <div class="container">
+            <ul>
+                <li><a href="#area" onclick="showSection('area')">Cálculo de Área</a></li>
+                <li><a href="#irrigacao" onclick="showSection('irrigacao')">Irrigação</a></li>
+                <li><a href="#fertilizante" onclick="showSection('fertilizante')">Fertilizantes</a></li>
+                <li><a href="#sementes" onclick="showSection('sementes')">Sementes</a></li>
+                <li><a href="#colheita" onclick="showSection('colheita')">Produtividade</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main class="container">
+        <!-- Seção: Cálculo de Área -->
+        <section id="area" class="calculator-section active">
+            <h2>📐 Cálculo de Área do Terreno</h2>
+            <div class="calculator-card">
+                <h3>Área Retangular</h3>
+                <div class="formula">
+                    <strong>Fórmula:</strong> Área = Comprimento × Largura
+                </div>
+                <div class="input-group">
+                    <label for="comprimento">Comprimento (metros):</label>
+                    <input type="number" id="comprimento" placeholder="Ex: 100" step="0.01">
+                </div>
+                <div class="input-group">
+                    <label for="largura">Largura (metros):</label>
+                    <input type="number" id="largura" placeholder="Ex: 50" step="0.01">
+                </div>
+                <button onclick="calcularAreaRetangular()">Calcular Área</button>
+                <div id="resultado-area-ret" class="resultado"></div>
+            </div>
+
+            <div class="calculator-card">
+                <h3>Área Circular</h3>
+                <div class="formula">
+                    <strong>Fórmula:</strong> Área = π × raio²
+                </div>
+                <div class="input-group">
+                    <label for="raio">Raio (metros):</label>
+                    <input type="number" id="raio" placeholder="Ex: 25" step="0.01">
+                </div>
+                <button onclick="calcularAreaCircular()">Calcular Área</button>
+                <div id="resultado-area-circ" class="resultado"></div>
+            </div>
+
+            <div class="calculator-card">
+                <h3>Conversão de Unidades</h3>
+                <div class="conversao-info">
+                    <p><strong>1 hectare (ha)</strong> = 10.000 m²</p>
+                    <p><strong>1 alqueire paulista</strong> = 24.200 m²</p>
+                    <p><strong>1 alqueire mineiro</strong> = 48.400 m²</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Seção: Irrigação -->
+        <section id="irrigacao" class="calculator-section">
+            <h2>💧 Cálculo de Irrigação</h2>
+            <div class="calculator-card">
+                <h3>Volume de Água Necessário</h3>
+                <div class="formula">
+                    <strong>Fórmula:</strong> Volume = Área × Lâmina d'água × Eficiência
+                </div>
+                <div class="input-group">
+                    <label for="area-irrigacao">Área a irrigar (m²):</label>
+                    <input type="number" id="area-irrigacao" placeholder="Ex: 1000" step="0.01">
+                </div>
+                <div class="input-group">
+                    <label for="lamina-agua">Lâmina d'água (mm):</label>
+                    <input type="number" id="lamina-agua" placeholder="Ex: 10" step="0.1">
+                </div>
+                <div class="input-group">
+                    <label for="eficiencia">Eficiência do sistema (%):</label>
+                    <input type="number" id="eficiencia" placeholder="Ex: 85" step="1" min="1" max="100">
+                </div>
+                <button onclick="calcularIrrigacao()">Calcular Volume</button>
+                <div id="resultado-irrigacao" class="resultado"></div>
+            </div>
+
+            <div class="calculator-card">
+                <h3>Tempo de Irrigação</h3>
+                <div class="formula">
+                    <strong>Fórmula:</strong> Tempo = Volume necessário ÷ Vazão do sistema
+                </div>
+                <div class="input-group">
+                    <label for="volume-necessario">Volume necessário (litros):</label>
+                    <input type="number" id="volume-necessario" placeholder="Ex: 1000" step="0.01">
+                </div>
+                <div class="input-group">
+                    <label for="vazao-sistema">Vazão do sistema (L/h):</label>
+                    <input type="number" id="vazao-sistema" placeholder="Ex: 500" step="0.01">
+                </div>
+                <button onclick="calcularTempoIrrigacao()">Calcular Tempo</button>
+                <div id="resultado-tempo-irrigacao" class="resultado"></div>
+            </div>
+        </section>
+
+        <!-- Seção: Fertilizantes -->
+        <section id="fertilizante" class="calculator-section">
+            <h2>🌿 Cálculo de Fertilizantes</h2>
+            <div class="calculator-card">
+                <h3>Quantidade de Fertilizante</h3>
+                <div class="formula">
+                    <strong>Fórmula:</strong> Quantidade = (Área × Dose recomendada) ÷ 1000
+                </div>
+                <div class="input-group">
+                    <label for="area-fertilizante">Área a fertilizar (m²):</label>
+                    <input type="number" id="area-fertilizante" placeholder="Ex: 5000" step="0.01">
+                </div>
+                <div class="input-group">
+                    <label for="dose-fertilizante">Dose recomendada (g/m²):</label>
+                    <input type="number" id="dose-fertilizante" placeholder="Ex: 50" step="0.1">
+                </div>
+                <button onclick="calcularFertilizante()">Calcular Quantidade</button>
+                <div id="resultado-fertilizante" class="resultado"></div>
+            </div>
+
+            <div class="calculator-card">
+                <h3>Custo de Fertilização</h3>
+                <div class="formula">
+                    <strong>Fórmula:</strong> Custo = Quantidade total × Preço por kg
+                </div>
+                <div class="input-group">
+                    <label for="quantidade-fertilizante">Quantidade total (kg):</label>
+                    <input type="number" id="quantidade-fertilizante" placeholder="Ex: 250" step="0.01">
+                </div>
+                <div class="input-group">
+                    <label for="preco-fertilizante">Preço por kg (R$):</label>
+                    <input type="number" id="preco-fertilizante" placeholder="Ex: 2.50" step="0.01">
+                </div>
+                <button onclick="calcularCustoFertilizante()">Calcular Custo</button>
+                <div id="resultado-custo-fertilizante" class="resultado"></div>
+            </div>
+        </section>
+
+        <!-- Seção: Sementes -->
+        <section id="sementes" class="calculator-section">
+            <h2>🌾 Cálculo de Sementes</h2>
+            <div class="calculator-card">
+                <h3>Quantidade de Sementes</h3>
+                <div class="formula">
+                    <strong>Fórmula:</strong> Quantidade = Área × Densidade de plantio
+                </div>
+                <div class="input-group">
+                    <label for="area-sementes">Área de plantio (m²):</label>
+                    <input type="number" id="area-sementes" placeholder="Ex: 10000" step="0.01">
+                </div>
+                <div class="input-group">
+                    <label for="densidade-plantio">Densidade de plantio (sementes/m²):</label>
+                    <input type="number" id="densidade-plantio" placeholder="Ex: 5" step="0.1">
+                </div>
+                <div class="input-group">
+                    <label for="germinacao">Taxa de germinação (%):</label>
+                    <input type="number" id="germinacao" placeholder="Ex: 90" step="1" min="1" max="100">
+                </div>
+                <button onclick="calcularSementes()">Calcular Sementes</button>
+                <div id="resultado-sementes" class="resultado"></div>
+            </div>
+
+            <div class="calculator-card">
+                <h3>Espaçamento entre Plantas</h3>
+                <div class="formula">
+                    <strong>Fórmula:</strong> Espaçamento = √(10000 ÷ Densidade)
+                </div>
+                <div class="input-group">
+                    <label for="densidade-espacamento">Densidade desejada (plantas/m²):</label>
+                    <input type="number" id="densidade-espacamento" placeholder="Ex: 4" step="0.1">
+                </div>
+                <button onclick="calcularEspacamento()">Calcular Espaçamento</button>
+                <div id="resultado-espacamento" class="resultado"></div>
+            </div>
+        </section>
+
+        <!-- Seção: Produtividade -->
+        <section id="colheita" class="calculator-section">
+            <h2>📊 Cálculo de Produtividade</h2>
+            <div class="calculator-card">
+                <h3>Produtividade por Hectare</h3>
+                <div class="formula">
+                    <strong>Fórmula:</strong> Produtividade = (Produção total ÷ Área) × 10000
+                </div>
+                <div class="input-group">
+                    <label for="producao-total">Produção total (kg):</label>
+                    <input type="number" id="producao-total" placeholder="Ex: 5000" step="0.01">
+                </div>
+                <div class="input-group">
+                    <label for="area-colheita">Área colhida (m²):</label>
+                    <input type="number" id="area-colheita" placeholder="Ex: 10000" step="0.01">
+                </div>
+                <button onclick="calcularProdutividade()">Calcular Produtividade</button>
+                <div id="resultado-produtividade" class="resultado"></div>
+            </div>
+
+            <div class="calculator-card">
+                <h3>Receita Bruta</h3>
+                <div class="formula">
+                    <strong>Fórmula:</strong> Receita = Produção total × Preço de venda
+                </div>
+                <div class="input-group">
+                    <label for="producao-receita">Produção total (kg):</label>
+                    <input type="number" id="producao-receita" placeholder="Ex: 5000" step="0.01">
+                </div>
+                <div class="input-group">
+                    <label for="preco-venda">Preço de venda (R$/kg):</label>
+                    <input type="number" id="preco-venda" placeholder="Ex: 3.50" step="0.01">
+                </div>
+                <button onclick="calcularReceita()">Calcular Receita</button>
+                <div id="resultado-receita" class="resultado"></div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 AgroCalc - Desenvolvido para facilitar o trabalho do agricultor</p>
+            <p>Todas as fórmulas são baseadas em práticas agronômicas reconhecidas</p>
+        </div>
+    </footer>
+
+    <script src="js/script.js"></script>
+</body>
+</html>
+
